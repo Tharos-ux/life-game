@@ -10,7 +10,7 @@ class Cell:
         Positionnal args:
         state (False) - living state of celle : False means dead, True means alive
         '''
-        self.state = False
+        self.state = state
         #TODO add some things to this poor cell :(
 
     def set_dead(self):
