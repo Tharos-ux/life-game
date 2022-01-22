@@ -31,5 +31,8 @@ class Cell:
         '''
         return self.state
 
-    def __str__(self):
+    def to_string(self):
         return "O" if self.state else " "
+
+    def __str__(self):
+        return "Alive" if self.state else "Dead"

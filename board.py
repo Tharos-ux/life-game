@@ -15,3 +15,11 @@ class Board:
         '''
         self.layout = [[cell.Cell(True if random.random()>0.3 else False) for _ in range(x)] for _ in range(y)]
         #TODO add some things to this poor board :(
+
+    def __str__(self):
+        ret = ""
+        for row in self.layout:
+            for cell in row:
+                ret += cell.to_string()
+            ret += "\n"
+        return ret
