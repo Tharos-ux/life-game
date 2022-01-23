@@ -1,6 +1,8 @@
 '''
 Graphical interface
 '''
+
+
 import board
 import cell
 import numpy as np
@@ -34,7 +36,8 @@ def gen_img(board,x,y):
     for i in range(x):
         for j in range(y):
             data[i,j] = [254,0,0] if board.get_cell(i,j).get_state() else [0,0,0]
-    return Image.fromarray(data)
+    img = Image.fromarray(data)
+    return img
 
 def show(board):
     "show the window"

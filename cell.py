@@ -3,14 +3,16 @@ Define a cell
 '''
 
 class Cell:
-    def __init__(self,state=False):
+    def __init__(self,state=False,method="0"):
         '''
         Cell constructor
 
         Positionnal args:
         state (False) - living state of celle : False means dead, True means alive
+        method(0) - way it interacts with her surroundings at each new iteration
         '''
         self.state = state
+        self.method = method
         #TODO add some things to this poor cell :(
 
     def set_dead(self):
@@ -25,6 +27,12 @@ class Cell:
         '''
         self.state = True
 
+    def set_state(self,state):
+        '''
+        setter ; set cell status
+        '''
+        self.state = state
+
     def get_state(self):
         '''
         getter; true if cell is alive, false otherwise
@@ -36,3 +44,19 @@ class Cell:
 
     def __str__(self):
         return "Alive" if self.state else "Dead"
+
+    def new_state(self,surroundings):
+        """
+        We call a specific developpement method by a name given in parameter ; each cell may have its own path
+        """
+        task = getattr(Tasks, 'Exec' + self.method)
+        self.state = task(surroundings)
+
+class Tasks:
+    "Each method must return new cell state (True/False)"
+
+    def Exec0(surroundings):
+        pass #TODO
+
+    def Exec1(surroundings):
+        pass #TODO
