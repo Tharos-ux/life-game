@@ -6,7 +6,9 @@ Graphical interface
 import board
 import cell
 import numpy as np
-from PIL import Image
+from PIL import Image as im
+import IPython.display as display
+from tkinter import *
 
 def show(board):
     "show graphic representation of the life game"
@@ -15,8 +17,8 @@ def show(board):
     for i in range(x):
         for j in range(y):
             data[i,j] = [254,0,0] if board.get_cell(i,j).get_state() else [0,0,0]
-    img = Image.fromarray(data)
-    img.show()
+    img = im.fromarray(data)
+    img.save('visu.png')
 
 """
 
@@ -31,7 +33,6 @@ from tkinter import *
 
 def gen_img(board,x,y):
     "graphic representation of the life game"
-    
     data = np.zeros((x,y,3), dtype=np.uint8)
     for i in range(x):
         for j in range(y):
