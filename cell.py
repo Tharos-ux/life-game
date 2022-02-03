@@ -1,17 +1,20 @@
 '''
 Define a cell
 '''
+import random
 
 class Cell:
-    def __init__(self,state=False,method="0"):
+    def __init__(self,color,state=False,method="0"):
         '''
         Cell constructor
 
         Positionnal args:
         state (False) - living state of celle : False means dead, True means alive
         method(0) - way it interacts with her surroundings at each new iteration
+        color - define its color it should be displayed to if its alive
         '''
         self.state = state
+        self.color = color
         self.method = method
         #TODO add some things to this poor cell :(
 
@@ -56,7 +59,7 @@ class Tasks:
     "Each method must return new cell state (True/False)"
 
     def Exec0(surroundings):
-        pass #TODO
+        random.choice(surroundings).state = True
 
     def Exec1(surroundings):
         pass #TODO
