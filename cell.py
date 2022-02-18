@@ -2,9 +2,17 @@
 Define a cell
 '''
 import random
+from enum import Enum,auto
+
+class Etat(Enum):
+    "Représentation d'un état cellulaire"
+    # todo edit properties in consequence
+    ALIVE = auto()
+    DEAD = auto()
+
 
 class Cell:
-    def __init__(self,color,state=False,method="0"):
+    def __init__(self, color:str, state:Etat=Etat.DEAD, method:str="0"):
         '''
         Cell constructor
 
@@ -13,9 +21,9 @@ class Cell:
         method(0) - way it interacts with her surroundings at each new iteration
         color - define its color it should be displayed to if its alive
         '''
-        self.state = state
-        self.color = color
-        self.method = method
+        self.state:Etat = state
+        self.color:str = color
+        self.method:str = method
         #TODO add some things to this poor cell :(
 
     def set_dead(self):
