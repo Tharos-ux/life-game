@@ -21,39 +21,36 @@ class Cell:
         method(0) - way it interacts with her surroundings at each new iteration
         color - define its color it should be displayed to if its alive
         '''
-        self.state:Etat = state
-        self.color:str = color
-        self.method:str = method
+        self.__state:Etat = state
+        self.__color:str = color
+        self.__method:str = method
         #TODO add some things to this poor cell :(
 
-    def set_dead(self):
-        '''
-        setter ; cell status to dead
-        '''
-        self.state = False
+    @property
+    def state(self) -> Etat:
+        return self.__state
 
-    def set_alive(self):
-        '''
-        setter ; cell status to alive
-        '''
-        self.state = True
+    @state.setter
+    def state(self,state:Etat) -> None:
+        self.__state = state
 
-    def set_state(self,state):
-        '''
-        setter ; set cell status
-        '''
-        self.state = state
+    @property
+    def color(self) -> str:
+        return self.__color
 
-    def get_state(self):
-        '''
-        getter; true if cell is alive, false otherwise
-        '''
-        return self.state
+    @color.setter
+    def color(self,color:str) -> None:
+        self.__state = color
 
-    def to_string(self):
-        return "O" if self.state else " "
+    @property
+    def method(self) -> str:
+        return self.__method
 
-    def __str__(self):
+    @method.setter
+    def method(self,method:str) -> None:
+        self.__method = method
+
+    def __str__(self) -> str:
         return "Alive" if self.state else "Dead"
 
     def new_state(self,surroundings):
