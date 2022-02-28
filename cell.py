@@ -8,7 +8,7 @@ class Etat(Enum):
     "Représentation d'un état cellulaire"
     # todo edit properties in consequence
     ALIVE = auto()
-    DEAD = auto()
+    DEAD = [0,0,0]
 
 
 class Cell:
@@ -18,12 +18,12 @@ class Cell:
 
         Positionnal args:
         state (False) - living state of celle : False means dead, True means alive
-        method(0) - way it interacts with her surroundings at each new iteration
+        method (0) - way it interacts with her surroundings at each new iteration
         color - define its color it should be displayed to if its alive
         '''
         self.__state:Etat = state
         self.__color:str = color
-        self.__method:str = method
+        self.__method:str = random.choice(["0","1"])
         #TODO add some things to this poor cell :(
 
     @property
@@ -40,7 +40,7 @@ class Cell:
 
     @color.setter
     def color(self,color:str) -> None:
-        self.__state = color
+        self.__color = color
 
     @property
     def method(self) -> str:
@@ -53,18 +53,39 @@ class Cell:
     def __str__(self) -> str:
         return "Alive" if self.state else "Dead"
 
-    def new_state(self,surroundings):
+    def new_state(self,origin,surroundings):
         """
         We call a specific developpement method by a name given in parameter ; each cell may have its own path
         """
         task = getattr(Tasks, 'Exec' + self.method)
-        self.state = task(surroundings)
+        task(origin,surroundings)
 
 class Tasks:
     "Each method must return new cell state (True/False)"
 
-    def Exec0(surroundings):
-        random.choice(surroundings).state = True
+    def Exec0(origin,surroundings):
+        # cellules qui vivent, qui meurent, et qui se battent un peu
+        if random.random()<0.05: origin.state = Etat.DEAD
+        if surroundings != []:
+            for cell in surroundings:
+                if cell.state == Etat.DEAD:
+                    if random.random()<0.25:
+                        cell.color = origin.color
+                        cell.method = origin.method
+                        cell.state = Etat.ALIVE
+                else:
+                    cell.color = origin.color if random.random()<0.01 else cell.color
 
-    def Exec1(surroundings):
-        pass #TODO
+
+    def Exec1(origin,surroundings):
+        # cellules qui vivent, qui meurent, mais qui se battent BEAUCOUP
+        if random.random()<0.05: origin.state = Etat.DEAD
+        if surroundings != []:
+            for cell in surroundings:
+                if cell.state == Etat.DEAD:
+                    if random.random()<0.25:
+                        cell.color = origin.color
+                        cell.method = origin.method
+                        cell.state = Etat.ALIVE
+                else:
+                    cell.color = origin.color if random.random()<0.50 else cell.color

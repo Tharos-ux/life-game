@@ -12,11 +12,11 @@ from tkinter import *
 
 def show(board,gen=0):
     "show graphic representation of the life game"
-    x,y = board.get_x(),board.get_y()
+    x,y = board.x,board.y
     data = np.zeros((x,y,3), dtype=np.uint8)
     for i in range(x):
         for j in range(y):
-            data[i,j] = board.get_cell(i,j).color if board.get_cell(i,j).get_state() else [0,0,0]
+            data[i,j] = board.get_cell(i,j).color if board.get_cell(i,j).state==cell.Etat.ALIVE else [0,0,0]
     img = im.fromarray(data)
     img.save(f"visu{gen}.png")
 
