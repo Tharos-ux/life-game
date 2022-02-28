@@ -7,8 +7,8 @@ import cell as c
 import random
 
 # constantes
-GENERATIONS:int = 100
-BOARD_SIZE:int = 100
+GENERATIONS:int = 50
+BOARD_SIZE:int = 300
 
 
 

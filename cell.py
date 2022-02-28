@@ -58,6 +58,19 @@ class Cell:
     def __str__(self) -> str:
         return "Alive" if self.state else "Dead"
 
+    def mutation(self,contact):
+        "contact is another cell it may get something from"
+        if random.random()<0.001: # maybe add mutation factor inside cell def
+            match random.randrange(0,3):
+                case 0:
+                    self.state = contact.state
+                case 1:
+                    self.color = contact.color
+                case 2:
+                    self.method = contact.method
+
+
+
     def new_state(self,origin,surroundings):
         """
         We call a specific developpement method by a name given in parameter ; each cell may have its own path
@@ -73,6 +86,7 @@ class Tasks:
         if random.random()<0.05: origin.state = Etat.DEAD
         if surroundings != []:
             for cell in surroundings:
+                origin.mutation(cell)
                 if cell.state == Etat.DEAD:
                     if random.random()<0.25:
                         cell.color = origin.color
@@ -87,6 +101,7 @@ class Tasks:
         if random.random()<0.05: origin.state = Etat.DEAD
         if surroundings != []:
             for cell in surroundings:
+                origin.mutation(cell)
                 if cell.state == Etat.DEAD:
                     if random.random()<0.25:
                         cell.color = origin.color
@@ -100,6 +115,7 @@ class Tasks:
         if random.random()<0.05: origin.state = Etat.DEAD
         if surroundings != []:
             for cell in surroundings:
+                origin.mutation(cell)
                 if cell.state == Etat.DEAD:
                     if random.random()<0.25:
                         cell.color = origin.color
