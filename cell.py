@@ -12,7 +12,7 @@ class Etat(Enum):
 
 
 class Cell:
-    def __init__(self, color:str, state:Etat=Etat.DEAD, method:str="0"):
+    def __init__(self, color:str, state:Etat=Etat.DEAD, method:str="0", lifespan:int=10):
         '''
         Cell constructor
 
@@ -23,7 +23,8 @@ class Cell:
         '''
         self.__state:Etat = state
         self.__color:str = color
-        self.__method:str = random.choice(["0","1"])
+        self.__method:str = random.choice(["0","1","2"])
+        self.__lifespan:int = lifespan # to add to them a half-life after
         #TODO add some things to this poor cell :(
 
     @property
@@ -49,6 +50,10 @@ class Cell:
     @method.setter
     def method(self,method:str) -> None:
         self.__method = method
+
+    def half_life(self) -> float:
+        "Probability = polygon"
+        return float(0)
 
     def __str__(self) -> str:
         return "Alive" if self.state else "Dead"
@@ -89,3 +94,16 @@ class Tasks:
                         cell.state = Etat.ALIVE
                 else:
                     cell.color = origin.color if random.random()<0.50 else cell.color
+
+    def Exec2(origin,surroundings):
+        # cellules qui mutent au contact de d'autres, et qui meurent
+        if random.random()<0.05: origin.state = Etat.DEAD
+        if surroundings != []:
+            for cell in surroundings:
+                if cell.state == Etat.DEAD:
+                    if random.random()<0.25:
+                        cell.color = origin.color
+                        cell.method = origin.method
+                        cell.state = Etat.ALIVE
+                else:
+                    cell.color = [int((origin.color[0]+cell.color[0])/2),int((origin.color[1]+cell.color[1])/2),int((origin.color[2]+cell.color[2])/2)]

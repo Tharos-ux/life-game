@@ -33,7 +33,7 @@ class Board:
         returns all existing cells around a position
         '''
         if self.get_cell(x,y).state == cell.Etat.ALIVE:
-            cells,tries,maxX,maxY = [],[(x-1,y-1),(x+1,y+1),(x,y+1),(x+1,y),(x-1,y+1),(x+1,y-1),(x-1,y),(x,y-1)],self.x,self.y
+            cells,tries,maxX,maxY = [],[(x-1,y-1),(x+1,y+1),(x,y+1),(x+1,y),(x-1,y+1),(x+1,y-1),(x-1,y),(x,y-1),(x+2,y),(x-2,y),(x,y+2),(x,y-2)],self.x,self.y
             for e in tries:
                 if (e[0]>=0 and e[1]>=0 and e[0]<maxX and e[1]<maxY):
                     cells.append(self.get_cell(e[0],e[1]))
