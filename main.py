@@ -5,11 +5,11 @@ import board as b
 import graphics
 import cell as c
 import random
+import numpy as np
 
 # constantes
-GENERATIONS:int = 50
+GENERATIONS:int = 100
 BOARD_SIZE:int = 300
-
 
 
 def main():

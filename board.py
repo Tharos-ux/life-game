@@ -3,6 +3,7 @@ Code how the display is done
 '''
 import cell
 import random
+import numpy as np
 
 class Board:
     def __init__(self,x,y,alive=0.1):
@@ -18,7 +19,10 @@ class Board:
         '''
         self.__x = x
         self.__y = y
-        self.layout = [[cell.Cell([random.choice([50,100,200]),random.choice([50,100,200]),random.choice([50,100,200])],cell.Etat.ALIVE if random.random()<0.001 else cell.Etat.DEAD) for _ in range(x)] for _ in range(y)]
+        # numpy array 
+        self.layout = np.empty((0, y), cell.Cell)
+        for _ in range(y):
+            self.layout = np.append(self.layout, np.array([[cell.Cell([random.choice([50,100,200]),random.choice([50,100,200]),random.choice([50,100,200])],cell.Etat.ALIVE if random.random()<0.001 else cell.Etat.DEAD) for _ in range(x)]]), axis=0)
         #TODO add some things to this poor board :(
 
     def get_updatables(self):
@@ -44,7 +48,7 @@ class Board:
         '''
         getter; cell in (x,y)
         ''' 
-        return self.layout[x][y]
+        return self.layout[x,y]
 
     def update_cell(self,x,y):
         my_cell = self.get_cell(x,y)
