@@ -10,7 +10,7 @@ from PIL import Image as im
 import IPython.display as display
 from tkinter import *
 
-def show(board,gen=0):
+def show(board,folder,gen=0):
     "show graphic representation of the life game"
     x,y = board.x,board.y
     data = np.zeros((x,y,3), dtype=np.uint8)
@@ -18,7 +18,7 @@ def show(board,gen=0):
         for j in range(y):
             data[i,j] = board.get_cell(i,j).color if board.get_cell(i,j).state==cell.Etat.ALIVE else [0,0,0]
     img = im.fromarray(data)
-    img.save(f"visu{gen}.png")
+    img.save(f"{folder}/visu{gen}.png")
 
 """
 

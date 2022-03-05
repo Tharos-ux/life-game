@@ -3,6 +3,7 @@ Define a cell
 '''
 import random
 from enum import Enum,auto
+from my_checker import my_class_checker
 
 class Etat(Enum):
     "Représentation d'un état cellulaire"
@@ -10,9 +11,9 @@ class Etat(Enum):
     ALIVE = auto()
     DEAD = [0,0,0]
 
-
+#@my_class_checker Ne pas utiliser de class check ici, car méthodes beaucoup appelées donc rajoute BEAUCOUP de temps d'exécution
 class Cell:
-    def __init__(self, color:str, state:Etat=Etat.DEAD, method:str="0", lifespan:int=10):
+    def __init__(self, color:list, state:Etat=Etat.DEAD, method:str="0", lifespan:int=10):
         '''
         Cell constructor
 
@@ -21,10 +22,10 @@ class Cell:
         method (0) - way it interacts with her surroundings at each new iteration
         color - define its color it should be displayed to if its alive
         '''
-        self.__state:Etat = state
-        self.__color:str = color
-        self.__method:str = random.choice(["0","1","2"])
-        self.__lifespan:int = lifespan # to add to them a half-life after
+        self.state = state
+        self.color = color
+        self.method = random.choice(["0","1","2"])
+        self.lifespan = lifespan # to add to them a half-life after
         #TODO add some things to this poor cell :(
 
     @property
@@ -53,6 +54,7 @@ class Cell:
 
     def half_life(self) -> float:
         "Probability = polygon"
+        # TODO
         return float(0)
 
     def __str__(self) -> str:
