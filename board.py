@@ -39,14 +39,7 @@ class Board:
         return []
 
     def get_cell(self,x,y):
-        '''
-        getter; cell in (x,y)
-        ''' 
         return self.layout[x,y]
-
-    def update_cell(self,x,y):
-        my_cell = self.get_cell(x,y)
-        my_cell.new_state(self.get_surroundings(x,y))
       
     @property
     def x(self) -> int:
