@@ -3,15 +3,17 @@ Define a cell
 '''
 import random
 from enum import Enum,auto
-from my_checker import my_class_checker
+from typing import Callable
+
+
 
 class Etat(Enum):
     "Représentation d'un état cellulaire"
-    # todo edit properties in consequence
+    # TODO edit properties
     ALIVE = auto()
     DEAD = [0,0,0]
 
-#@my_class_checker Ne pas utiliser de class check ici, car méthodes beaucoup appelées donc rajoute BEAUCOUP de temps d'exécution
+# Ne pas utiliser de class check ici, car méthodes beaucoup appelées donc rajoute BEAUCOUP de temps d'exécution
 class Cell:
     def __init__(self, color:list, state:Etat=Etat.DEAD, method:str="0", lifespan:int=10):
         '''
@@ -79,6 +81,12 @@ class Cell:
         """
         task = getattr(Tasks, 'Exec' + self.method)
         task(origin,surroundings)
+
+
+HalfLife = Callable[[Cell],int]
+NextGen = Callable[[Cell,list],None]
+# to replace horrible taskmanager
+
 
 class Tasks:
     "Each method must return new cell state (True/False)"
